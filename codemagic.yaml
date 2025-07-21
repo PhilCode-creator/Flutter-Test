@@ -5,8 +5,12 @@ workflows:
       flutter: stable
       xcode: latest
     scripts:
-      - flutter build ios --simulator
-      - mkdir -p build/ios/ipa
-      - zip -r build/ios/ipa/Runner.app.zip build/ios/iphonesimulator/Runner.app
+      - name: Set up code signing
+        script: |
+          # Insert your own method to set up signing here (automatic or manual)
+          echo "Skipping code signing setup"
+      - name: Build iOS app for release
+        script: |
+          flutter build ipa --release
     artifacts:
-      - build/ios/ipa/Runner.app.zip
+      - build/ios/ipa/*.ipa
